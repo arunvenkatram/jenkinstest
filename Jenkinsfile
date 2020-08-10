@@ -12,4 +12,15 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'something has happened in build'
+        }
+        success {
+            echo 'build has failed'
+        }
+        failure {
+            echo 'something has failed'
+        }
+    }
 }
