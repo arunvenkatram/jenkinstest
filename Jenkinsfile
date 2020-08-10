@@ -1,17 +1,9 @@
 pipeline {
-    agent any
-    environment {
-        CI = 'true'
-    }
+    agent { docker { image 'maven:3.3.3' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'npm install'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
+                sh 'mvn --version'
             }
         }
     }
