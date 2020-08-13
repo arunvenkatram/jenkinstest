@@ -1,29 +1,23 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000 -p 5000:5000' 
+        }
+    }
     environment {
-        VERSION = '1.0.0'
+        CI = 'true'
     }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                echo 'building the application ${VERSION}'
+                sh 'npm install'
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
-                echo 'testing the application ${VERSION}'
+                sh './jenkins/scripts/test.sh'
             }
-        }
-    }
-    post {
-        always {
-            echo 'something has happened in build'
-        }
-        success {
-            echo 'build has failed'
-        }
-        failure {
-            echo 'something has failed'
         }
     }
 }
