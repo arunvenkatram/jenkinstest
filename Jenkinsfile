@@ -7,11 +7,13 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building the application ${VERSION}'
+                exit 0
             }
         }
         stage('test') {
             steps {
                 echo 'testing the application ${VERSION}'
+                exit 0
             }
         }
     }
